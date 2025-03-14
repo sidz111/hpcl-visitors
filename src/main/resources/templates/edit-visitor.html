@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<title>Manasvi Inventory</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="keywords" />
+<meta content="" name="description" />
+
+<!-- Favicon -->
+<link href="images/fevicon.png" rel="icon" />
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap"
+	rel="stylesheet" />
+
+<!-- Icon Font Stylesheet -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet" />
+
+<!-- Libraries Stylesheet -->
+<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet" />
+<link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+	rel="stylesheet" />
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Template Stylesheet -->
+<link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="container-fluid  d-flex p-0">
+		<!-- Spinner Start -->
+		<div id="spinner"
+			class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+			<div class="spinner-border text-primary"
+				style="width: 3rem; height: 3rem" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+		<!-- Spinner End -->
+
+		<!-- Sidebar Start -->
+		<div class="sidebar pe-4 pb-3">
+			<nav class="navbar bg-white text-dark">
+				<a href="/" class="navbar-brand mx-4 mb-3">
+					<h3 class="text-primary">
+						<img class="" src="images/hpcl.jpeg" alt=""
+							style="width: 100%; height: 60%" />
+					</h3>
+				</a>
+
+				<div class="navbar-nav w-100">
+					<a href="/" class="nav-item nav-link"><i
+						class="fa fa-home fs-4 me-2"></i>Dashboard</a>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="fas fa-users fs-4 me-2"></i>Visitors</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="/visitor/add" class="dropdown-item">Add Visitor</a>
+						</div>
+					</div>
+
+				</div>
+			</nav>
+
+			<!-- Logout Button -->
+			<div class="logout-btn-container">
+				<a href="/logout"
+					class="btn logout-btn fw-bold px-3 py-2 fs-5 shadow"> <i
+					class="fas fa-sign-out-alt me-2"></i> Logout
+				</a>
+			</div>
+
+		</div>
+
+		<!-- Sidebar End -->
+
+		<!-- Content Start -->
+		<div class="content">
+			<!-- Navbar Start -->
+			<nav class="navbar navbar-expand navbar-dark sticky-top px-4 py-0"
+				style="background-color: #008bf9;">
+				<a href="#" class="sidebar-toggler flex-shrink-0"> <i
+					class="fa fa-bars"></i>
+				</a>
+				<h2 class="ms-5 text-blue">HPCL Visitors Module</h2>
+				<div class="navbar-nav align-items-center ms-auto">
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"> <i
+							class="text-danger fa fa-bell me-lg-2"></i> <span
+							class="d-none d-lg-inline-flex">Notification</span>
+						</a>
+
+						<div
+							class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0 p-3">
+						</div>
+					</div>
+
+
+
+				</div>
+			</nav>
+			<!-- Navbar End -->
+
+			<div class="m-3">
+
+				<form action="/update" method="post" id="visitorForm"
+					th:class="${visitor}" enctype="multipart/form-data">
+
+					<div class="row mt-2">
+						<div class="col-md-12 mb-2">
+							<label for="id">ID:</label> <input type="hidden" name="id"
+								th:value="${visitor.id}" id="id" class="form-control"
+								placeholder="Token Number" readonly>
+						</div>
+					</div>
+
+					<div class="row mt-2">
+						<div class="col-md-12 mb-2">
+							<label for="token_no">Token Number:</label> <input type="text"
+								name="tokenNo" th:value="${visitor.tokenNo}" id="token_no"
+								class="form-control" placeholder="Token Number" readonly>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 mb-2">
+							<label for="aadhar_no">Aadhar Number:</label> <input type="text"
+								name="aadharNo" id="aadhar_no"
+								th:value="${visitor.aadharNo}"
+								class="form-control text-dark bg-white "
+								oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+								minlength="12" maxlength="12" placeholder="Aadhar Number">
+							<span id="aadharerror" class="text-danger"></span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 mb-2">
+							<label for="full_name">Full Name:</label> <input type="text"
+								name="fullName" th:value="${visitor.fullName}" id="full_name"
+								class="form-control text-dark bg-white"
+								oninput="this.value=this.value.replace(/[^a-z\sA-Z]/g,'');"
+								placeholder="Full Name"> <span id="nameerror"
+								class="text-danger"></span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 mb-2">
+							<label for="mobile_no">Mobile Number:</label> <input type="text"
+								name="mobileNo" th:value="${visitor.mobileNo}" id="mobile_no"
+								class="form-control text-dark bg-white"
+								oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+								minlength="10" maxlength="10" placeholder="Mobile Number">
+							<span id="contacterror" class="text-danger"></span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 mb-2">
+							<label for="address">Address:</label>
+							<textarea name="address" th:value="${visitor.address}" id="address"
+								class="form-control text-dark bg-white"
+								oninput="this.value=this.value.replace(/[^a-z\sA-Z0-9,.-]/g,'');"
+								rows="3"></textarea>
+							<span id="addrerror" class="text-danger"></span>
+						</div>
+
+						<div class="col-md-12 mb-2">
+							<label for="to_see_whom">To See Whom:</label> <select
+								name="toSeeWhom" th:value="${visitor.toSeeWhom}" id="to_see_whom" class="form-control">
+								<option value="">Select</option>
+								<option value="Officer1">Officer 1</option>
+								<option value="Officer2">Officer 2</option>
+								<option value="Officer3">Officer 3</option>
+								<!-- Populate this dynamically using Spring Boot -->
+							</select> <small id="seewhomerror" class="text-danger"></small>
+						</div>
+
+
+						<div class="col-md-12 mb-2">
+							<label for="purpose_to_visit">Purpose To Visit:</label>
+							<textarea name="purposeToVisit" th:value="${visitor.purposeToVisit}" id="purpose_to_visit"
+								class="form-control text-dark bg-white"
+								oninput="this.value=this.value.replace(/[^a-z\sA-Z]/g,'');"
+								placeholder="Enter the Purpose"></textarea>
+							<span id="purposeerror" class="text-danger"></span>
+						</div>
+					</div>
+
+					<!-- Capture Photo -->
+					<div class="row mb-4 ps-4">
+						<label for="photo" class="ps-4">Capture Photo:</label>
+						<div class="col-md-6">
+							<div id="camera-feed">
+								<video id="video" width="320" height="240" autoplay></video>
+								<small id="photoValidation" class="text-danger"></small>
+							</div>
+							<button type="button" class="btn btn-primary" id="capture-btn"
+								onclick="capturePhoto()">Capture</button>
+							<input type="hidden" id="photo" name="photo" th:value="${visitor.photo}">
+						</div>
+						<div class="col-md-6">
+							<canvas id="canvas" width="320" height="240"
+								style="display: none;"></canvas>
+							<img id="photo-preview" src="#" alt="Captured Photo" width="320"
+								height="240">
+						</div>
+					</div>
+
+					<!-- Capture ID Photo -->
+					<div class="row mb-4 ps-4">
+						<label for="idPhoto" class="ps-4">Capture ID Photo:</label>
+						<div class="col-md-6">
+							<div id="camera-feedid">
+								<video id="videoid" width="320" height="240" autoplay></video>
+								<small id="photoValidationid" class="text-danger"></small>
+							</div>
+							<button type="button" class="btn btn-primary" id="capture-btnid"
+								onclick="capturePhotoId()">Capture</button>
+							<input type="hidden" id="idPhoto" name="idPhoto" th:value="${visitor.idPhoto}">
+						</div>
+						<div class="col-md-6">
+							<canvas id="canvasid" width="320" height="240"
+								style="display: none;"></canvas>
+							<img id="id-photo-preview" src="#" alt="Captured ID Photo"
+								width="320" height="240">
+						</div>
+					</div>
+
+					<!-- Regular Visitor Checkbox -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-check ms-3 mb-4">
+								<input class="form-check-input" type="checkbox" name="isRegular"
+									id="is_regular" value="true"> <label
+									class="form-check-label" for="is_regular">Is Regular?</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- Form Buttons -->
+					<div class="d-grid gap-2 d-sm-block">
+						<div class="d-flex gap-2">
+							<button class="btn btn-primary" name="update">
+								<i class="fa-solid fa-floppy-disk"></i> Update
+							</button>
+							<button class="btn btn-success" name="idcard-btn" id="idcard-btn">Generate
+								Pass</button>
+							<a href="visitor.php" class="btn btn-danger"><i
+								class="fa-solid fa-arrow-left"></i> Back</a>
+							<button class="btn btn-danger" name="drop"
+								onclick="confirmDelete(event);">
+								<i class="fa-solid fa-user-xmark"></i> Drop
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			
+			<script>
+let stream1, stream2;
+
+// Start camera for visitor photo
+function startVisitorCamera() {
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            stream1 = stream;
+            let video = document.getElementById('video');
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(err => console.log("Visitor camera error: " + err));
+}
+
+// Start camera for ID photo
+function startIdCamera() {
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            stream2 = stream;
+            let video = document.getElementById('videoid');
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(err => console.log("ID camera error: " + err));
+}
+
+// Capture visitor photo
+function capturePhoto() {
+    let video = document.getElementById('video');
+    let canvas = document.getElementById('canvas');
+    let preview = document.getElementById('photo-preview');
+    let context = canvas.getContext('2d');
+    
+    context.drawImage(video, 0, 0, 320, 240);
+    let photoData = canvas.toDataURL('image/jpeg');
+    
+    document.getElementById('photo').value = photoData;
+    preview.src = photoData;
+    preview.style.display = 'block';
+    canvas.style.display = 'none';
+}
+
+// Capture ID photo
+function capturePhotoId() {
+    let video = document.getElementById('videoid');
+    let canvas = document.getElementById('canvasid');
+    let preview = document.getElementById('id-photo-preview');
+    let context = canvas.getContext('2d');
+    
+    context.drawImage(video, 0, 0, 320, 240);
+    let photoData = canvas.toDataURL('image/jpeg');
+    
+    document.getElementById('idPhoto').value = photoData;
+    preview.src = photoData;
+    preview.style.display = 'block';
+    canvas.style.display = 'none';
+}
+
+// Form validation
+document.getElementById("visitorForm").addEventListener("submit", function(event) {
+    let photoInput = document.getElementById("photo").value;
+    let photoValidation = document.getElementById("photoValidation");
+    let idPhotoInput = document.getElementById("idPhoto").value;
+    let idPhotoValidation = document.getElementById("photoValidationid");
+
+    if (!photoInput) {
+        photoValidation.textContent = "Please capture visitor photo.";
+        event.preventDefault();
+    }
+    
+    if (!idPhotoInput) {
+        idPhotoValidation.textContent = "Please capture ID photo.";
+        event.preventDefault();
+    }
+});
+
+// Initialize cameras on page load
+window.onload = function() {
+    startVisitorCamera();
+    startIdCamera();
+    
+    // Set initial preview if exists (for editing)
+    const photoInput = document.getElementById('photo');
+    const idPhotoInput = document.getElementById('idPhoto');
+    if (photoInput.value) {
+        document.getElementById('photo-preview').src = photoInput.value;
+        document.getElementById('photo-preview').style.display = 'block';
+    }
+    if (idPhotoInput.value) {
+        document.getElementById('id-photo-preview').src = idPhotoInput.value;
+        document.getElementById('id-photo-preview').style.display = 'block';
+    }
+};
+
+// Cleanup on page unload
+window.onunload = function() {
+    if (stream1) stream1.getTracks().forEach(track => track.stop());
+    if (stream2) stream2.getTracks().forEach(track => track.stop());
+};
+</script>
+			
+			
+			
+			
+			<script>
+				document.getElementById("stockForm").addEventListener("submit", function (event) {
+					var stockItemId = document.getElementById("stockItem").value;
+					var count = document.getElementById("count").value;
+
+					if (!stockItemId || !count || count <= 0) {
+						alert("Please select a stock item and enter a valid quantity.");
+						event.preventDefault();
+						return;
+					}
+
+					// Set the form action dynamically
+					this.action = "/stock/use-stock/" + stockItemId + "/" + count;
+				});
+			</script>
+
+			<script>
+				const formatDate = (date) => {
+					const year = date.getFullYear();
+					const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+					const day = String(date.getDate()).padStart(2, '0');
+
+					return `${year}-${month}-${day}`;
+				};
+
+				const currentDate = new Date();
+				document.querySelector("#currentDate").innerHTML = formatDate(currentDate);
+			</script>
+			<!-- JavaScript Libraries -->
+			<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="lib/chart/chart.min.js"></script>
+			<script src="lib/easing/easing.min.js"></script>
+			<script src="lib/waypoints/waypoints.min.js"></script>
+			<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+			<script src="lib/tempusdominus/js/moment.min.js"></script>
+			<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+			<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+			<!-- Template Javascript -->
+			<script src="/js/main.js"></script>
+</body>
+</html>
