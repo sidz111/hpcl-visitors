@@ -120,7 +120,7 @@ public class VisitorController {
 	    if (idPhotoBase64 != null && !idPhotoBase64.isEmpty() && idPhotoBase64.contains("base64,")) {
 	        String base64Data = idPhotoBase64.split(",")[1];
 	        byte[] decodedBytes = Base64.getDecoder().decode(base64Data);
-	        visitorImage2 = System.currentTimeMillis() + "_id.jpg";
+	        visitorImage2 = fullName + "_" + id + "_id.jpg";
 	        
 	        if (!Files.exists(uploadDir)) {
 	            Files.createDirectories(uploadDir);
