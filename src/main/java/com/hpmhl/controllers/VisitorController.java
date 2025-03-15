@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hpmhl.entities.GatePass;
 import com.hpmhl.entities.Visitor;
 import com.hpmhl.repositories.VisitorRepository;
+import com.hpmhl.services.GatePassService;
 import com.hpmhl.services.VisitorService;
 
 @Controller
@@ -34,6 +36,9 @@ public class VisitorController {
 
 	@Autowired
 	JavaMailSender javaMailSender;
+	
+	@Autowired
+	GatePassService gatePassService;
 
 	@GetMapping("/")
 	public String getHomePage(Model model) {
@@ -135,6 +140,91 @@ public class VisitorController {
 	    visitorService.saveVisitor(v);
 	    
 	    return "redirect:/";
+	}
+	
+	@PostMapping("/generate-gate-pass")
+	public String generateGatePass(
+	        @RequestParam("id") Integer id,
+	        @RequestParam("aadharNo") String aadharNo,
+	        @RequestParam("fullName") String fullName,
+	        @RequestParam("mobileNo") String mobileNo,
+	        @RequestParam("address") String address,
+	        @RequestParam("toSeeWhom") String toSeeWhom,
+	        @RequestParam("purposeToVisit") String purposeToVisit,
+	        @RequestParam(value = "photo", required = false) String photoBase64,
+	        @RequestParam(value = "idPhoto", required = false) String idPhotoBase64,
+	        @RequestParam(value = "isRegular", defaultValue = "false") boolean isRegular,
+	        Model model) throws IOException {
+
+	    Visitor v = visitorService.getVisitorById(id);
+	    v.setAadharNo(aadharNo);
+	    v.setFullName(fullName);
+	    v.setMobileNo(mobileNo);
+	    v.setAddress(address);
+	    v.setToSeeWhom(toSeeWhom);
+	    v.setPurposeToVisit(purposeToVisit);
+	    v.setIsRegular(isRegular);
+	    v.setDate(new Date().toString());
+	    v.setQrCodeValue("V/HPMHL/" + id);
+	    v.setRestricted(false);
+
+	    String visitorImage = v.getPhoto() != null ? v.getPhoto() : "default_visitor.jpg";
+	    Path uploadDir = Paths.get("src/main/resources/static/gate-pass");
+
+	    // Ensure the directory exists
+	    if (!Files.exists(uploadDir)) {
+	        Files.createDirectories(uploadDir);
+	    }
+
+	    // Handle visitor photo
+	    if (photoBase64 != null && !photoBase64.isEmpty() && photoBase64.contains("base64,")) {
+	        try {
+	            String base64Data = photoBase64.split(",")[1];
+	            byte[] decodedBytes = Base64.getDecoder().decode(base64Data);
+	            visitorImage = System.currentTimeMillis() + "_visitor_gatePass.jpg";
+	            Path filePath = uploadDir.resolve(visitorImage);
+	            Files.write(filePath, decodedBytes);
+	        } catch (Exception e) {
+	            System.err.println("Error decoding visitor photo: " + e.getMessage());
+	        }
+	    }
+
+	    String visitorImage2 = v.getIdPhoto() != null ? v.getIdPhoto() : "default_visitor2.jpg";
+
+	    // Handle ID photo
+	    if (idPhotoBase64 != null && !idPhotoBase64.isEmpty() && idPhotoBase64.contains("base64,")) {
+	        try {
+	            String base64Data = idPhotoBase64.split(",")[1];
+	            byte[] decodedBytes = Base64.getDecoder().decode(base64Data);
+	            visitorImage2 = fullName.replaceAll("\\s", "_") + "_" + id + "_id.jpg";
+	            Path filePath2 = uploadDir.resolve(visitorImage2);
+	            Files.write(filePath2, decodedBytes);
+	        } catch (Exception e) {
+	            System.err.println("Error decoding ID photo: " + e.getMessage());
+	        }
+	    }
+
+	    v.setPhoto(visitorImage);
+	    v.setIdPhoto(visitorImage2);
+
+	    GatePass gatePass = new GatePass();
+	    gatePass.setVisitor(v);
+	    
+	    // Generate unique gate pass number
+	    gatePass = gatePassService.createGatePass(gatePass);
+	    gatePass.setGatePassNumber(gatePass.getId().toString());
+
+	    v.setGatePass(gatePass);
+	    return "redirect:/success";
+	}
+	
+	@GetMapping("/search-get-pass")
+	public String getPass(@RequestParam("id") Integer id, Model model) {
+//		visitorService.getVisitorById(id).setTokenNo(id);
+		gatePassService.getGatePassById(id).get().setGatePassNumber(id.toString());
+		model.addAttribute("visitor", gatePassService.getGatePassById(id).get().getVisitor());
+		System.out.println(gatePassService.getGatePassById(id).get().getVisitor().getFullName());
+		return "gate-pass";
 	}
 
 }

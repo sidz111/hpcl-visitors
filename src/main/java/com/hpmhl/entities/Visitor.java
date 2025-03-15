@@ -1,9 +1,11 @@
 package com.hpmhl.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Visitor {
@@ -49,6 +51,9 @@ public class Visitor {
     private Boolean restricted;
     
     private String access;
+    
+    @OneToOne(mappedBy = "visitor", cascade = CascadeType.ALL)
+    private GatePass gatePass;
 
 	public Integer getId() {
 		return id;
@@ -210,15 +215,12 @@ public class Visitor {
 		this.access = access;
 	}
 
-	@Override
-	public String toString() {
-		return "Visitor [id=" + id + ", tokenNo=" + tokenNo + ", srno=" + srno + ", aadharNo=" + aadharNo
-				+ ", fullName=" + fullName + ", mobileNo=" + mobileNo + ", address=" + address + ", toSeeWhom="
-				+ toSeeWhom + ", purposeToVisit=" + purposeToVisit + ", isRegular=" + isRegular + ", date=" + date
-				+ ", workingAs=" + workingAs + ", photo=" + photo + ", idPhoto=" + idPhoto + ", qrCodeValue="
-				+ qrCodeValue + ", qrpath=" + qrpath + ", timeIn=" + timeIn + ", timeOut=" + timeOut + ", restricted="
-				+ restricted + ", access=" + access + "]";
+	public GatePass getGatePass() {
+		return gatePass;
 	}
-	
-	
+
+	public void setGatePass(GatePass gatePass) {
+		this.gatePass = gatePass;
+	}
+
 }

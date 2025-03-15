@@ -37,6 +37,8 @@
 
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet" />
+
+
 </head>
 
 <body>
@@ -118,163 +120,85 @@
 
 			<div class="m-3">
 
-				<form action="/update" method="post" id="visitorForm"
-					th:class="${visitor}" enctype="multipart/form-data">
+				<div class="invoice">
+					
 
-					<div class="row mt-2">
-						<div class="col-md-12 mb-2">
-							<label for="id">ID:</label> <input type="hidden" name="id"
-								th:value="${visitor.id}" id="id" class="form-control"
-								placeholder="Token Number" readonly>
-						</div>
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td><strong>Sr No:</strong> <span th:text="${visitor.gatePass.id}"></span></td>
+								<td><strong>Date:</strong> <span th:text="${visitor.date}"></span></td>
+							</tr>
+							<tr>
+								<td><strong>Token No:</strong> <span
+									th:text="${visitor.tokenNo}"></span></td>
+								<td><strong>Aadhar No:</strong> <span
+									th:text="${visitor.aadharNo}"></span></td>
+							</tr>
+							<tr>
+								<td><strong>Full Name:</strong> <span
+									th:text="${visitor.fullName}"></span></td>
+								<td><strong>Mobile No:</strong> <span
+									th:text="${visitor.mobileNo}"></span></td>
+							</tr>
+							<tr>
+								<td><strong>Address:</strong> <span
+									th:text="${visitor.address}"></span></td>
+								<td><strong>To See Whom:</strong> <span
+									th:text="${visitor.toSeeWhom}"></span></td>
+							</tr>
+							<tr>
+								<td><strong>Purpose of Visit:</strong> <span
+									th:text="${visitor.purposeToVisit}"></span></td>
+								<td><strong>Regular Visitor:</strong> <span
+									th:text="${visitor.isRegular}"></span></td>
+							</tr>
+							<tr>
+								<td><strong>Time In:</strong> <span
+									th:text="${visitor.timeIn}"></span></td>
+								<td><strong>Time Out:</strong> <span
+									th:text="${visitor.timeOut}"></span></td>
+							</tr>
+							<tr>
+								<td><strong>Working As:</strong> <span
+									th:text="${visitor.workingAs}"></span></td>
+								<td><strong>Access Level:</strong> <span
+									th:text="${visitor.access}"></span></td>
+							</tr>
+							<tr>
+								<td><strong>Gate Pass ID:</strong> <span
+									th:text="${visitor.gatePass.id}"></span></td>
+								<td><strong>Restricted:</strong> <span
+									th:text="${visitor.restricted}"></span></td>
+							</tr>
+							 <tr>
+                <td class="text-center">
+                    <img th:src="@{'/gate-pass/' + ${visitor.photo}}" class="visitor-photo" alt="Visitor Photo">
+                    <br><strong>Visitor Photo</strong>
+                </td>
+                <td class="text-center">
+                    <img th:src="@{'/gate-pass/' + ${visitor.idPhoto}}" class="id-photo" alt="ID Photo">
+                    <br><strong>ID Photo</strong>
+                </td>
+            </tr>
+						</tbody>
+					</table>
+
+					<div class="footer">
+						<button class="btn-print" onclick="printInvoice()">Print
+							Gate Pass</button>
 					</div>
+				</div>
 
-					<div class="row mt-2">
-						<div class="col-md-12 mb-2">
-							<label for="token_no">Token Number:</label> <input type="text"
-								name="tokenNo" th:value="${visitor.tokenNo}" id="token_no"
-								class="form-control" placeholder="Token Number" readonly>
-						</div>
-					</div>
+				<script>
+    function printInvoice() {
+        window.print();
+    }
+</script>
 
-					<div class="row">
-						<div class="col-md-12 mb-2">
-							<label for="aadhar_no">Aadhar Number:</label> <input type="text"
-								name="aadharNo" id="aadhar_no"
-								th:value="${visitor.aadharNo}"
-								class="form-control text-dark bg-white "
-								oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-								minlength="12" maxlength="12" placeholder="Aadhar Number">
-							<span id="aadharerror" class="text-danger"></span>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 mb-2">
-							<label for="full_name">Full Name:</label> <input type="text"
-								name="fullName" th:value="${visitor.fullName}" id="full_name"
-								class="form-control text-dark bg-white"
-								oninput="this.value=this.value.replace(/[^a-z\sA-Z]/g,'');"
-								placeholder="Full Name"> <span id="nameerror"
-								class="text-danger"></span>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 mb-2">
-							<label for="mobile_no">Mobile Number:</label> <input type="text"
-								name="mobileNo" th:value="${visitor.mobileNo}" id="mobile_no"
-								class="form-control text-dark bg-white"
-								oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-								minlength="10" maxlength="10" placeholder="Mobile Number">
-							<span id="contacterror" class="text-danger"></span>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 mb-2">
-							<label for="address">Address:</label>
-							<textarea name="address" id="address" class="form-control text-dark bg-white"
-    oninput="this.value=this.value.replace(/[^a-z\sA-Z0-9,.-]/g,'');" rows="3"
-    th:text="${visitor.address}">
-</textarea>
-
-							<span id="addrerror" class="text-danger"></span>
-						</div>
-
-						<div class="col-md-12 mb-2">
-							<label for="to_see_whom">To See Whom:</label> <select
-								name="toSeeWhom" th:value="${visitor.toSeeWhom}" id="to_see_whom" class="form-control">
-								<option value="">Select</option>
-								<option value="Officer1">Officer 1</option>
-								<option value="Officer2">Officer 2</option>
-								<option value="Officer3">Officer 3</option>
-								<!-- Populate this dynamically using Spring Boot -->
-							</select> <small id="seewhomerror" class="text-danger"></small>
-						</div>
-
-
-						<div class="col-md-12 mb-2">
-							<label for="purpose_to_visit">Purpose To Visit:</label>
-							<textarea name="purposeToVisit" th:value="${visitor.purposeToVisit}" id="purpose_to_visit"
-								class="form-control text-dark bg-white"
-								oninput="this.value=this.value.replace(/[^a-z\sA-Z]/g,'');"
-								placeholder="Enter the Purpose"></textarea>
-							<span id="purposeerror" class="text-danger"></span>
-						</div>
-					</div>
-
-					<!-- Capture Photo -->
-					<div class="row mb-4 ps-4">
-						<label for="photo" class="ps-4">Capture Photo:</label>
-						<div class="col-md-6">
-							<div id="camera-feed">
-								<video id="video" width="320" height="240" autoplay></video>
-								<small id="photoValidation" class="text-danger"></small>
-							</div>
-							<button type="button" class="btn btn-primary" id="capture-btn"
-								onclick="capturePhoto()">Capture</button>
-							<input type="hidden" id="photo" name="photo" th:value="${visitor.photo}">
-						</div>
-						<div class="col-md-6">
-							<canvas id="canvas" width="320" height="240"
-								style="display: none;"></canvas>
-							<img id="photo-preview" src="#" alt="Captured Photo" width="320"
-								height="240">
-						</div>
-					</div>
-
-					<!-- Capture ID Photo -->
-					<div class="row mb-4 ps-4">
-						<label for="idPhoto" class="ps-4">Capture ID Photo:</label>
-						<div class="col-md-6">
-							<div id="camera-feedid">
-								<video id="videoid" width="320" height="240" autoplay></video>
-								<small id="photoValidationid" class="text-danger"></small>
-							</div>
-							<button type="button" class="btn btn-primary" id="capture-btnid"
-								onclick="capturePhotoId()">Capture</button>
-							<input type="hidden" id="idPhoto" name="idPhoto" th:value="${visitor.idPhoto}">
-						</div>
-						<div class="col-md-6">
-							<canvas id="canvasid" width="320" height="240"
-								style="display: none;"></canvas>
-							<img id="id-photo-preview" src="#" alt="Captured ID Photo"
-								width="320" height="240">
-						</div>
-					</div>
-
-					<!-- Regular Visitor Checkbox -->
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-check ms-3 mb-4">
-								<input class="form-check-input" type="checkbox" name="isRegular"
-									id="is_regular" value="true"> <label
-									class="form-check-label" for="is_regular">Is Regular?</label>
-							</div>
-						</div>
-					</div>
-
-					<!-- Form Buttons -->
-					<div class="d-grid gap-2 d-sm-block">
-						<div class="d-flex gap-2">
-							<button class="btn btn-primary" name="update">
-								<i class="fa-solid fa-floppy-disk"></i> Update
-							</button>
-							<button class="btn btn-success" name="idcard-btn" id="idcard-btn">Generate
-								Pass</button>
-							<a href="visitor.php" class="btn btn-danger"><i
-								class="fa-solid fa-arrow-left"></i> Back</a>
-							<button class="btn btn-danger" name="drop"
-								onclick="confirmDelete(event);">
-								<i class="fa-solid fa-user-xmark"></i> Drop
-							</button>
-						</div>
-					</div>
-				</form>
 			</div>
 
-			
+
 			<script>
 let stream1, stream2;
 
@@ -376,10 +300,10 @@ window.onunload = function() {
     if (stream2) stream2.getTracks().forEach(track => track.stop());
 };
 </script>
-			
-			
-			
-			
+
+
+
+
 			<script>
 				document.getElementById("stockForm").addEventListener("submit", function (event) {
 					var stockItemId = document.getElementById("stockItem").value;
@@ -408,7 +332,7 @@ window.onunload = function() {
 				const currentDate = new Date();
 				document.querySelector("#currentDate").innerHTML = formatDate(currentDate);
 			</script>
-			
+
 			<script>
 			
 			
@@ -456,14 +380,14 @@ window.onunload = function() {
     })
     .catch(error => {
         console.error("Error:", error);
-        console.log("Error generating Gate Pass. Please try again.");
+        alert("Error generating Gate Pass. Please try again.");
     });
 });
 			
 			
 			
 			</script>
-			
+
 			<!-- JavaScript Libraries -->
 			<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 			<script

@@ -181,17 +181,49 @@
 							</div>
 						</div>
 					</div>
+					<!-- Button to trigger modal -->
 					<div class="col-md-4">
 						<div class="row">
-							<a href="#" class="btn bg-danger text-dark form-control fs-4"
-								height="50px">Search Gate Pass</a>
+							<button type="button"
+								class="btn bg-danger text-dark form-control fs-4"
+								data-bs-toggle="modal" data-bs-target="#searchGatePassModal">
+								Search Gate Pass</button>
 						</div>
 					</div>
 				</div>
 			</div>
 
 
-
+			<!-- Modal Structure -->
+			<div class="modal fade" id="searchGatePassModal" tabindex="-1"
+				aria-labelledby="searchGatePassModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="searchGatePassModalLabel">Search
+								Gate Pass</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<!-- Search Form Inside Modal -->
+							<form action="/search-get-pass" method="get">
+								<div class="mb-3">
+									<label for="id" class="form-label">Gate Pass ID</label>
+									<input type="number" class="form-control text-dark bg-white" id="id"
+										name="id" placeholder="Enter Gate Pass ID" required>
+								</div>
+								
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary">Search</button>
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">Close</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
 
@@ -216,8 +248,17 @@
 									Name</h6>
 								<form action="/edit" method="get">
 									<input type="hidden" name="id" th:value="${v.id}" />
-									<button class="btn bg-primary text-dark form-control fs-4"
-										type="submit">Edit</button>
+									<button th:if="${v.fullName == null}"
+										class="btn bg-primary text-dark form-control fs-4"
+										type="submit">
+										<i class="fa fa-plus"></i> Add
+									</button>
+
+									<button th:if="${v.fullName != null}"
+										class="btn bg-primary text-dark form-control fs-4"
+										type="submit">
+										<i class="fa fa-edit"></i> Edit
+									</button>
 								</form>
 							</div>
 						</div>
