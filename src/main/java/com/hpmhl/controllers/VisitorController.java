@@ -220,7 +220,6 @@ public class VisitorController {
 	
 	@GetMapping("/search-get-pass")
 	public String getPass(@RequestParam("id") Integer id, Model model) {
-//		visitorService.getVisitorById(id).setTokenNo(id);
 		gatePassService.getGatePassById(id).get().setGatePassNumber(id.toString());
 		model.addAttribute("visitor", gatePassService.getGatePassById(id).get().getVisitor());
 		System.out.println(gatePassService.getGatePassById(id).get().getVisitor().getFullName());
