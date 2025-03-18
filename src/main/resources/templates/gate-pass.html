@@ -464,8 +464,6 @@ body {
 					<p>Sion LPG Bottling Plant, G-6, MIDC, Malegaon, Maharashtra
 						422213 GSTIN: 27AAACH1088B1ZC</p>
 					<p>Visitor Slip</p>
-					<img src="qr-9e5843671f3cc028759d5660d9520d32.png" alt="Right Logo"
-						class="right-logo" />
 				</div>
 				<div class="visitor-slip-title-section">
 					<div>
@@ -477,28 +475,28 @@ body {
 						<p>PATALGANGA LPG FILLING PLANT</p>
 					</div>
 					<div>
-						<p>आगमन का समय (Arrival Time):_________</p>
-						<p>प्रस्थान का समय (Departure Time)</p>
+						<!-- <p>आगमन का समय (Arrival Time):_________</p>
+						<p>प्रस्थान का समय (Departure Time)</p> -->
 					</div>
 				</div>
 				<div class="visitor-slip-green-bar">केवल एडमिन क्षेत्र में
 					प्रवेश के लिए</div>
 				<div class="visitor-slip-details">
 					<div class="form-group">
-						<label>Sr No:</label> <input type="text" id="id" th:value="${gatePass.id}"
-							readonly />
+						<label>Sr No:</label> <input type="text" id="id"
+							th:value="${gatePass.id}" readonly />
 					</div>
 					<div class="form-group">
 						<label>१) आगंतुक का नाम</label> <input type="text" id="name"
 							th:value="${gatePass.fullName}" readonly />
 					</div>
 					<div class="form-group">
-						<label>२) कार्य स्थल (Location)</label> <input type="text" id="address"
-							th:value="${gatePass.address}" readonly />
+						<label>२) कार्य स्थल (Location)</label> <input type="text"
+							id="address" th:value="${gatePass.address}" readonly />
 					</div>
 					<div class="form-group">
-						<label>३) आगंतुक का मोबाइल न.</label> <input type="text" id="contact"
-							th:value="${gatePass.mobileNo}" pattern="[0-9]{10}"
+						<label>३) आगंतुक का मोबाइल न.</label> <input type="text"
+							id="contact" th:value="${gatePass.mobileNo}" pattern="[0-9]{10}"
 							title="Please enter a 10-digit mobile number" readonly />
 					</div>
 					<div class="form-group">
@@ -506,6 +504,13 @@ body {
 							th:value="${gatePass.gatePassNumber}" pattern="[0-9]{12}"
 							title="Please enter a 12-digit ID number" readonly />
 					</div>
+
+					<div class="form-group">
+						<input type="hidden" id="qrCodeValue"
+							th:value="${gatePass.qrCodeValue}" />
+					</div>
+
+
 					<div class="form-group">
 						<label>५) मालिक/व्यवसाय का नाम</label> <input type="text"
 							th:value="${gatePass.fullName}" readonly />
@@ -673,43 +678,39 @@ body {
 
 			<div id="qrcode" class="qr-code-container"></div>
 			<br />
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+			<script>
 document.addEventListener('DOMContentLoaded', function() {
     // Extract gatePass data directly from Thymeleaf into a JS object
     const gatePass = {
-        id: document.querySelector('#id')?.value || 'N/A',
-        fullName: document.querySelector('#name')?.value || 'N/A',
-        date: document.querySelector('#date')?.textContent || 'N/A', // Using textContent since it's a span
-        address: document.querySelector('#address')?.value || 'N/A',
-        mobileNo: document.querySelector('#contact')?.value || 'N/A',
-        gatePassNumber: document.querySelector('#passId')?.value || 'N/A',
-        purposeToVisit: document.querySelector('#purpose')?.value || 'N/A',
-        // Add toSeeWhom if it exists in your HTML, otherwise remove it from qrData
-        toSeeWhom: document.querySelector('#gatePassToSeeWhom')?.value || 'N/A' // Assuming an input with this ID
+        id: document.querySelector('#qrCodeValue')?.value || 'N/A',
     };
 
     // Create QR code data string with actual values
     const qrData = `
         Visitor Pass Details:
         ID: ${gatePass.id}
-        Name: ${gatePass.fullName}
-        Date: ${gatePass.date}
-        Mobile: ${gatePass.mobileNo}
-        Address: ${gatePass.address}
-        To See: ${gatePass.toSeeWhom}
-        Purpose: ${gatePass.purposeToVisit}
     `.trim();
 
     // Generate QR code
-    new QRCode(document.getElementById("qrcode"), {
-        text: qrData,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
+    // Create QR code
+// Create QR code
+new QRCode(document.getElementById("qrcode"), {
+    text: qrData,
+    width: 100,
+    height: 100,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+});
+
+// Position QR Code at the top-right
+const qrContainer = document.getElementById("qrcode");
+qrContainer.style.position = "absolute";
+qrContainer.style.top = "14%"; // Adjust for spacing from top
+qrContainer.style.right = "7%"; // Adjust for spacing from right
+
 
     // Add click event to print button
     document.querySelector('.print-btn').addEventListener('click', function() {
