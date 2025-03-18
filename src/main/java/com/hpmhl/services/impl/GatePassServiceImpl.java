@@ -26,7 +26,7 @@ public class GatePassServiceImpl implements GatePassService {
         if (existingGatePass.isPresent()) {
             GatePass gatePass = existingGatePass.get();
             gatePass.setGatePassNumber(updatedGatePass.getGatePassNumber());
-            gatePass.setVisitor(updatedGatePass.getVisitor());
+//            gatePass.setVisitor(updatedGatePass.getVisitor());
             return gatePassRepository.save(gatePass);
         }
         return null;
@@ -47,10 +47,7 @@ public class GatePassServiceImpl implements GatePassService {
         return gatePassRepository.findById(visitorId);
     }
 
-    @Override
-    public GatePass getGatePassByVisitorFullName(String fullName) {
-        return gatePassRepository.findByVisitor_FullName(fullName);
-    }
+    
 
     @Override
     public List<GatePass> getAllGatePasses() {

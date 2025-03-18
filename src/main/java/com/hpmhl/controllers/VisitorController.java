@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -144,7 +145,7 @@ public class VisitorController {
 	
 	@PostMapping("/generate-gate-pass")
 	public String generateGatePass(
-	        @RequestParam("id") Integer id,
+			@RequestParam("id") Integer id,
 	        @RequestParam("aadharNo") String aadharNo,
 	        @RequestParam("fullName") String fullName,
 	        @RequestParam("mobileNo") String mobileNo,
@@ -156,19 +157,19 @@ public class VisitorController {
 	        @RequestParam(value = "isRegular", defaultValue = "false") boolean isRegular,
 	        Model model) throws IOException {
 
-	    Visitor v = visitorService.getVisitorById(id);
-	    v.setAadharNo(aadharNo);
-	    v.setFullName(fullName);
-	    v.setMobileNo(mobileNo);
-	    v.setAddress(address);
-	    v.setToSeeWhom(toSeeWhom);
-	    v.setPurposeToVisit(purposeToVisit);
-	    v.setIsRegular(isRegular);
-	    v.setDate(new Date().toString());
-	    v.setQrCodeValue("V/HPMHL/" + id);
-	    v.setRestricted(false);
+		GatePass gatePass = new GatePass();
+	    gatePass.setAadharNo(aadharNo);
+	    gatePass.setFullName(fullName);
+	    gatePass.setMobileNo(mobileNo);
+	    gatePass.setAddress(address);
+	    gatePass.setToSeeWhom(toSeeWhom);
+	    gatePass.setPurposeToVisit(purposeToVisit);
+	    gatePass.setIsRegular(isRegular);
+	    gatePass.setDate(new Date().toString());
+	    gatePass.setQrCodeValue("V/HPMHL/" + id);
+	    gatePass.setRestricted(false);
 
-	    String visitorImage = v.getPhoto() != null ? v.getPhoto() : "default_visitor.jpg";
+	    String visitorImage = gatePass.getPhoto() != null ? gatePass.getPhoto() : "default_visitor.jpg";
 	    Path uploadDir = Paths.get("src/main/resources/static/gate-pass");
 
 	    // Ensure the directory exists
@@ -189,7 +190,7 @@ public class VisitorController {
 	        }
 	    }
 
-	    String visitorImage2 = v.getIdPhoto() != null ? v.getIdPhoto() : "default_visitor2.jpg";
+	    String visitorImage2 = gatePass.getIdPhoto() != null ? gatePass.getIdPhoto() : "default_visitor2.jpg";
 
 	    // Handle ID photo
 	    if (idPhotoBase64 != null && !idPhotoBase64.isEmpty() && idPhotoBase64.contains("base64,")) {
@@ -204,25 +205,32 @@ public class VisitorController {
 	        }
 	    }
 
-	    v.setPhoto(visitorImage);
-	    v.setIdPhoto(visitorImage2);
+	    gatePass.setPhoto(visitorImage);
+	    gatePass.setIdPhoto(visitorImage2);
 
-	    GatePass gatePass = new GatePass();
-	    gatePass.setVisitor(v);
+//	    GatePass gatePass = new GatePass();
+	    gatePass.setDate(new Date().toString());
+	    gatePass.setVisitorId(id);
 	    
 	    // Generate unique gate pass number
-	    gatePass = gatePassService.createGatePass(gatePass);
-	    gatePass.setGatePassNumber(gatePass.getId().toString());
+//	    gatePass = gatePassService.createGatePass(gatePass);
+	    gatePass.setGatePassNumber(new Date().toString() + "_visitor" +id);
 
-	    v.setGatePass(gatePass);
-	    return "redirect:/success";
+//	    v.setGatePass(gatePass);
+	    gatePassService.createGatePass(gatePass);
+	    return "success";
 	}
 	
 	@GetMapping("/search-get-pass")
 	public String getPass(@RequestParam("id") Integer id, Model model) {
-		gatePassService.getGatePassById(id).get().setGatePassNumber(id.toString());
-		model.addAttribute("visitor", gatePassService.getGatePassById(id).get().getVisitor());
-		System.out.println(gatePassService.getGatePassById(id).get().getVisitor().getFullName());
+		Optional<GatePass> gatePass = gatePassService.getGatePassById(id);
+		if(gatePass.isEmpty()) {
+			return "redirect:/";
+		}
+		else {
+			model.addAttribute("gatePass", gatePass.get());			
+		}
+		System.out.println(gatePassService.getGatePassById(id).get());
 		return "gate-pass";
 	}
 

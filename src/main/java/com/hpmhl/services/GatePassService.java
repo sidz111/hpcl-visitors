@@ -17,7 +17,7 @@ public interface GatePassService {
     
     Optional<GatePass> getGatePassByVisitorId(Integer visitorId);
     
-    GatePass getGatePassByVisitorFullName(String fullName);
+//    GatePass getGatePassByVisitorFullName(String fullName);
     
     List<GatePass> getAllGatePasses();
 }

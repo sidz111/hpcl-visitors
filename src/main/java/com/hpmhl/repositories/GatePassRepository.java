@@ -10,6 +10,5 @@ public interface GatePassRepository extends JpaRepository<GatePass, Integer>{
 
 	GatePass findByGatePassNumber(String gatePassNumber);
 	
-	GatePass findByVisitor_FullName(String fullName);
 
 }

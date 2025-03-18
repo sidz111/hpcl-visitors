@@ -52,8 +52,6 @@ public class Visitor {
     
     private String access;
     
-    @OneToOne(mappedBy = "visitor", cascade = CascadeType.ALL)
-    private GatePass gatePass;
 
 	public Integer getId() {
 		return id;
@@ -213,14 +211,6 @@ public class Visitor {
 
 	public void setAccess(String access) {
 		this.access = access;
-	}
-
-	public GatePass getGatePass() {
-		return gatePass;
-	}
-
-	public void setGatePass(GatePass gatePass) {
-		this.gatePass = gatePass;
 	}
 
 }
