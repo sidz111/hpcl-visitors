@@ -9,5 +9,4 @@ public class VisitorHpmhlApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VisitorHpmhlApplication.class, args);
 	}
-
 }

@@ -38,303 +38,345 @@
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet" />
 
- <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #f4f4f4;
-      }
-      .visitor-slip {
-        width: 100%;
-        max-width: 900px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 2px solid #000;
-        box-sizing: border-box;
-        position: relative;
-      }
-      .visitor-slip-header {
-        text-align: center;
-        margin-bottom: 10px;
-      }
-      .visitor-slip-header p {
-        font-size: 14px;
-        margin: 0;
-        line-height: 1.2;
-      }
-      .visitor-slip-header img.left-logo {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 9%;
-        height: auto;
-      }
-      .visitor-slip-header img.right-logo {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 50px;
-        height: auto;
-      }
-      .visitor-slip-title-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .visitor-slip-title-section div {
-        flex: 1;
-      }
-      .visitor-slip-title-section div:first-child p,
-      .visitor-slip-title-section div:last-child p {
-        font-size: 14px;
-        margin: 0;
-      }
-      .visitor-slip-title-section div:nth-child(2) {
-        text-align: center;
-      }
-      .visitor-slip-title-section div:nth-child(2) p {
-        font-size: 16px;
-        font-weight: bold;
-        margin: 0;
-      }
-      .visitor-slip-title-section div:last-child {
-        text-align: right;
-      }
-      .visitor-slip-green-bar {
-        background-color: #008000;
-        height: 20px;
-        margin-bottom: 10px;
-        text-align: center;
-        color: white;
-      }
-      .visitor-slip-details {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 10px;
-      }
-      .visitor-slip-details .form-group {
-        flex: 1;
-        min-width: 200px;
-      }
-      .visitor-slip-details .form-group label {
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        display: block;
-      }
-      .visitor-slip-details .form-group input {
-        width: 100%;
-        padding: 5px;
-        border: none;
-        border-bottom: 1px solid #000;
-        font-size: 14px;
-        box-sizing: border-box;
-      }
-      .visitor-slip-signatures {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-      }
-      .visitor-slip-signatures div {
-        flex: 1;
-        text-align: center;
-      }
-      .visitor-slip-signatures div p {
-        font-size: 14px;
-        font-weight: bold;
-        margin: 0 0 5px;
-      }
-      .visitor-slip-signatures div input {
-        width: 100%;
-        padding: 5px;
-        border: none;
-        border-bottom: 1px solid #000;
-        font-size: 14px;
-        text-align: center;
-        box-sizing: border-box;
-      }
-      .visitor-slip-red-bar {
-        background-color: #ff0000;
-        height: 20px;
-        margin-bottom: 10px;
-        text-align: center;
-        color: white;
-      }
-      .visitor-slip-safety {
-        border: 1px solid #000;
-        padding: 10px;
-        margin-bottom: 10px;
-      }
-      .visitor-slip-safety p {
-        font-size: 12px;
-        margin: 0;
-        text-align: center;
-      }
-      .visitor-slip-signatures-bottom {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-      }
-      .visitor-slip-signatures-bottom div {
-        flex: 1;
-        text-align: center;
-      }
-      .visitor-slip-signatures-bottom div p {
-        font-size: 14px;
-        font-weight: bold;
-        margin: 0 0 5px;
-      }
-      .visitor-slip-signatures-bottom div input {
-        width: 100%;
-        padding: 5px;
-        border: none;
-        border-bottom: 1px solid #000;
-        font-size: 14px;
-        text-align: center;
-        box-sizing: border-box;
-      }
-      .visitor-slip-footer {
-        display: flex;
-        justify-content: space-between;
-        border: 1px solid #ff0000;
-        padding: 10px;
-      }
-      .visitor-slip-footer div {
-        flex: 1;
-      }
-      .visitor-slip-footer div p {
-        font-size: 12px;
-        margin: 0;
-        line-height: 1.2;
-      }
-      .visitor-slip-footer div:first-child p {
-        font-weight: bold;
-      }
-      .visitor-slip-footer div:last-child {
-        border-left: 1px solid #ff0000;
-        padding-left: 10px;
-      }
-      .visitor-slip-footer div:last-child p {
-        font-weight: bold;
-      }
-      .visitor-slip-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
-      }
-      .visitor-slip-buttons button {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
-      .visitor-slip-buttons .print-btn {
-        background-color: #008000;
-        color: white;
-        border: none;
-      }
-      .visitor-slip-buttons .back-btn {
-        background-color: #007bff;
-        color: white;
-        border: none;
-      }
-      .visitor-slip-additional-details {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 10px;
-      }
-      .visitor-slip-additional-details .form-group {
-        flex: 1;
-        min-width: 200px;
-      }
-      .visitor-slip-additional-details .form-group label {
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        display: block;
-      }
-      .visitor-slip-additional-details .form-group input {
-        width: 100%;
-        padding: 5px;
-        border: none;
-        border-bottom: 1px solid #000;
-        font-size: 14px;
-        box-sizing: border-box;
-      }
-      /* Styles for PDF viewer */
-      .pdf-modal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        max-width: 900px;
-        height: 80%;
-        background: white;
-        border: 2px solid #000;
-        z-index: 1000;
-        overflow: auto;
-      }
-      .pdf-modal iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-      }
-      .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-      @media (max-width: 600px) {
-        .visitor-slip {
-          padding: 10px;
-        }
-        .visitor-slip-details .form-group,
-        .visitor-slip-additional-details .form-group {
-          min-width: 100%;
-        }
-        .visitor-slip-signatures,
-        .visitor-slip-signatures-bottom,
-        .visitor-slip-footer {
-          flex-direction: column;
-          text-align: center;
-        }
-        .visitor-slip-signatures div,
-        .visitor-slip-signatures-bottom div,
-        .visitor-slip-footer div {
-          margin-bottom: 10px;
-        }
-        .visitor-slip-footer div:last-child {
-          border-left: none;
-          padding-left: 0;
-          border-top: 1px solid #ff0000;
-          padding-top: 10px;
-        }
-        .visitor-slip-header img.left-logo,
-        .visitor-slip-header img.right-logo {
-          width: 40px;
-        }
-        .pdf-modal {
-          width: 90%;
-          height: 90%;
-        }
-      }
-    </style>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #f4f4f4;
+}
+
+.visitor-slip {
+	width: 100%;
+	max-width: 900px;
+	margin: 20px auto;
+	padding: 20px;
+	border: 2px solid #000;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.visitor-slip-header {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.visitor-slip-header p {
+	font-size: 14px;
+	margin: 0;
+	line-height: 1.2;
+}
+
+.visitor-slip-header img.left-logo {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 9%;
+	height: auto;
+}
+
+.visitor-slip-header img.right-logo {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 50px;
+	height: auto;
+}
+
+.visitor-slip-title-section {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.visitor-slip-title-section div {
+	flex: 1;
+}
+
+.visitor-slip-title-section div:first-child p,
+	.visitor-slip-title-section div:last-child p {
+	font-size: 14px;
+	margin: 0;
+}
+
+.visitor-slip-title-section div:nth-child(2) {
+	text-align: center;
+}
+
+.visitor-slip-title-section div:nth-child(2) p {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.visitor-slip-title-section div:last-child {
+	text-align: right;
+}
+
+.visitor-slip-green-bar {
+	background-color: #008000;
+	height: 20px;
+	margin-bottom: 10px;
+	text-align: center;
+	color: white;
+}
+
+.visitor-slip-details {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.visitor-slip-details .form-group {
+	flex: 1;
+	min-width: 200px;
+}
+
+.visitor-slip-details .form-group label {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.visitor-slip-details .form-group input {
+	width: 100%;
+	padding: 5px;
+	border: none;
+	border-bottom: 1px solid #000;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+.visitor-slip-signatures {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	border: 1px solid #000;
+	padding: 10px;
+}
+
+.visitor-slip-signatures div {
+	flex: 1;
+	text-align: center;
+}
+
+.visitor-slip-signatures div p {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0 0 5px;
+}
+
+.visitor-slip-signatures div input {
+	width: 100%;
+	padding: 5px;
+	border: none;
+	border-bottom: 1px solid #000;
+	font-size: 14px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.visitor-slip-red-bar {
+	background-color: #ff0000;
+	height: 20px;
+	margin-bottom: 10px;
+	text-align: center;
+	color: white;
+}
+
+.visitor-slip-safety {
+	border: 1px solid #000;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.visitor-slip-safety p {
+	font-size: 12px;
+	margin: 0;
+	text-align: center;
+}
+
+.visitor-slip-signatures-bottom {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.visitor-slip-signatures-bottom div {
+	flex: 1;
+	text-align: center;
+}
+
+.visitor-slip-signatures-bottom div p {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0 0 5px;
+}
+
+.visitor-slip-signatures-bottom div input {
+	width: 100%;
+	padding: 5px;
+	border: none;
+	border-bottom: 1px solid #000;
+	font-size: 14px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.visitor-slip-footer {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid #ff0000;
+	padding: 10px;
+}
+
+.visitor-slip-footer div {
+	flex: 1;
+}
+
+.visitor-slip-footer div p {
+	font-size: 12px;
+	margin: 0;
+	line-height: 1.2;
+}
+
+.visitor-slip-footer div:first-child p {
+	font-weight: bold;
+}
+
+.visitor-slip-footer div:last-child {
+	border-left: 1px solid #ff0000;
+	padding-left: 10px;
+}
+
+.visitor-slip-footer div:last-child p {
+	font-weight: bold;
+}
+
+.visitor-slip-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.visitor-slip-buttons button {
+	padding: 10px 20px;
+	font-size: 14px;
+}
+
+.visitor-slip-buttons .print-btn {
+	background-color: #008000;
+	color: white;
+	border: none;
+}
+
+.visitor-slip-buttons .back-btn {
+	background-color: #007bff;
+	color: white;
+	border: none;
+}
+
+.visitor-slip-additional-details {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.visitor-slip-additional-details .form-group {
+	flex: 1;
+	min-width: 200px;
+}
+
+.visitor-slip-additional-details .form-group label {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.visitor-slip-additional-details .form-group input {
+	width: 100%;
+	padding: 5px;
+	border: none;
+	border-bottom: 1px solid #000;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+/* Styles for PDF viewer */
+.pdf-modal {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	max-width: 900px;
+	height: 80%;
+	background: white;
+	border: 2px solid #000;
+	z-index: 1000;
+	overflow: auto;
+}
+
+.pdf-modal iframe {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+
+@media ( max-width : 600px) {
+	.visitor-slip {
+		padding: 10px;
+	}
+	.visitor-slip-details .form-group, .visitor-slip-additional-details .form-group
+		{
+		min-width: 100%;
+	}
+	.visitor-slip-signatures, .visitor-slip-signatures-bottom,
+		.visitor-slip-footer {
+		flex-direction: column;
+		text-align: center;
+	}
+	.visitor-slip-signatures div, .visitor-slip-signatures-bottom div,
+		.visitor-slip-footer div {
+		margin-bottom: 10px;
+	}
+	.visitor-slip-footer div:last-child {
+		border-left: none;
+		padding-left: 0;
+		border-top: 1px solid #ff0000;
+		padding-top: 10px;
+	}
+	.visitor-slip-header img.left-logo, .visitor-slip-header img.right-logo
+		{
+		width: 40px;
+	}
+	.pdf-modal {
+		width: 90%;
+		height: 90%;
+	}
+}
+</style>
 </head>
 
 <body>
@@ -412,393 +454,306 @@
 
 				</div>
 			</nav>
-			
-			
+
+
 			<div class="visitor-slip">
-      <div class="visitor-slip-header">
-        <img th:src="@{'/gate-pass/' + ${gatePass.photo}}" alt="Left Logo" class="left-logo" />
-        <p>Hindustan Petroleum Corporation Limited</p>
-        <p>
-          Sion LPG Bottling Plant, G-6, MIDC, Malegaon, Maharashtra 422213
-          GSTIN: 27AAACH1088B1ZC
-        </p>
-        <p>Visitor Slip</p>
-        <img
-          src="qr-9e5843671f3cc028759d5660d9520d32.png"
-          alt="Right Logo"
-          class="right-logo"
-        />
-      </div>
-      <div class="visitor-slip-title-section">
-        <div>
-          <p>तारीख (Date): <span th:text="${gatePass.date}"></span></p>
-        </div>
-        <div>
-          <p>PATALGANGA LPG FILLING PLANT</p>
-        </div>
-        <div>
-          <p>आगमन का समय (Arrival Time):_________</p>
-          <p>प्रस्थान का समय (Departure Time)</p>
-        </div>
-      </div>
-      <div class="visitor-slip-green-bar">
-        केवल एडमिन क्षेत्र में प्रवेश के लिए
-      </div>
-      <div class="visitor-slip-details">
-        <div class="form-group">
-          <label>Sr No:</label>
-          <input type="text" th:value="${gatePass.id}" readonly />
-        </div>
-        <div class="form-group">
-          <label>१) आगंतुक का नाम</label>
-          <input type="text" th:value="${gatePass.fullName}" readonly />
-        </div>
-        <div class="form-group">
-          <label>२) कार्य स्थल (Location)</label>
-          <input type="text" th:value="${gatePass.address}" readonly />
-        </div>
-        <div class="form-group">
-          <label>३) आगंतुक का मोबाइल न.</label>
-          <input
-            type="text"
-            th:value="${gatePass.mobileNo}"
-            pattern="[0-9]{10}"
-            title="Please enter a 10-digit mobile number"
-            readonly
-          />
-        </div>
-        <div class="form-group">
-          <label>४) पहचान पत्र न.</label>
-          <input
-            type="text"
-            th:value="${gatePass.gatePassNumber}"
-            pattern="[0-9]{12}"
-            title="Please enter a 12-digit ID number"
-            readonly
-          />
-        </div>
-        <div class="form-group">
-          <label>५) मालिक/व्यवसाय का नाम</label>
-          <input type="text"  th:value="${gatePass.fullName}" readonly />
-        </div>
-        <div class="form-group">
-          <label>६) उद्देश्य</label>
-          <input type="text"  th:value="${gatePass.purposeToVisit}" readonly />
-        </div>
-        <div class="form-group">
-          <label>७) कंपनी का नाम (Company Name)</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[A-Za-z\s]{1,50}"
-            title="Please enter a valid company name (letters and spaces only, max 50 characters)"
-          />
-        </div>
-        <div class="form-group">
-          <label>८) वाहन नंबर (Vehicle Number)</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[A-Za-z0-9]{1,10}"
-            title="Please enter a valid vehicle number (max 10 characters)"
-          />
-        </div>
-        <div class="form-group">
-          <label>९) गाड़ी का प्रकार (Vehicle Type)</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[A-Za-z\s]{1,20}"
-            title="Please enter a valid vehicle type (letters and spaces only, max 20 characters)"
-          />
-        </div>
-        <div class="form-group">
-          <label>१०) ड्राइवर का नाम (Driver Name)</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[A-Za-z\s]{1,50}"
-            title="Please enter a valid driver name (letters and spaces only, max 50 characters)"
-          />
-        </div>
-        <div class="form-group">
-          <label>११) ड्राइवर का मोबाइल न. (Driver Mobile Number)</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[0-9]{10}"
-            title="Please enter a 10-digit mobile number"
-          />
-        </div>
-        <div class="form-group">
-          <label>१२) सामग्री का विवरण (Material Description)</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[A-Za-z0-9\s]{1,100}"
-            title="Please enter a valid material description (max 100 characters)"
-          />
-        </div>
-        <div class="form-group">
-          <label>१३) सामग्री की मात्रा (Material Quantity)</label>
-          <input
-            type="number"
-            value=""
-            required
-            min="1"
-            title="Please enter a valid quantity"
-          />
-        </div>
-        <div class="form-group">
-          <label>१४) लोडिंग/अनलोडिंग समय (Loading/Unloading Time)</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[0-9]{2}:[0-9]{2}"
-            title="Please enter time in HH:MM format"
-          />
-        </div>
-      </div>
-      <div class="visitor-slip-signatures">
-        <div>
-          <p>आगंतुक के हस्ताक्षर</p>
-          <input type="text" value="Visitor Signature" readonly />
-        </div>
-        <div>
-          <p>सुरक्षा के हस्ताक्षर</p>
-          <input type="text" value="Security Signature" readonly />
-        </div>
-        <div>
-          <p>प्राप्तकर्ता के हस्ताक्षर</p>
-          <input type="text" value="Receiver Signature" readonly />
-        </div>
-      </div>
-      <div class="visitor-slip-red-bar">
-        लाइसेंस प्राप्त क्षेत्र में प्रवेश के लिए
-      </div>
-      <!-- Added missing fields for Licensed Area Entry -->
-      <div class="visitor-slip-additional-details">
-        <div class="form-group">
-          <label>नाम:</label>
-          <input
-            type="text"
-            th:value="${gatePass.fullName}"
-            required
-            pattern="[A-Za-z\s]{1,50}"
-            title="Please enter a valid name (letters and spaces only, max 50 characters)"
-          />
-        </div>
-        <div class="form-group">
-          <label>हस्ताक्षर:</label>
-          <input
-            type="text"
-            value=""
-            required
-            pattern="[A-Za-z\s]{1,50}"
-            title="Please enter a valid signature (letters and spaces only, max 50 characters)"
-          />
-        </div>
-        <div class="form-group">
-          <label>उद्देश्य:</label>
-          <input
-            type="text"
-            th:value="${gatePass.purposeToVisit}"
-            required
-            pattern="[A-Za-z\s]{1,50}"
-            title="Please enter a valid purpose (letters and spaces only, max 50 characters)"
-          />
-        </div>
-      </div>
-      <div class="visitor-slip-safety">
-        <p>
-          I have been apprised about all safety precautions to be taken while in
-          licensed area and which are also printed on the backside of visitor
-          slip.
-        </p>
-        <p>
-          मुझे लाइसेंस प्राप्त क्षेत्र में रहते समय सभी सुरक्षा सावधानियों के
-          बारे में सूचित किया गया है जो आगंतुक पर्ची के पीछे भी मुद्रित हैं।
-        </p>
-      </div>
-      <div class="visitor-slip-signatures-bottom">
-        <div>
-          <p>सुरक्षा के हस्ताक्षर</p>
-          <input type="text" value="Security Signature" readonly />
-        </div>
-        <div>
-          <p>आगंतुक के हस्ताक्षर</p>
-          <input type="text" value="Visitor Signature" readonly />
-        </div>
-      </div>
-      <div class="visitor-slip-footer">
-        <div>
-          <div class="visitor-slip-red-bar">
-            <p>कृपया निम्न बातों को ध्यान रखें</p>
-          </div>
-
-          <ol>
-            <li>
-              1) सभी आगंतुकों को प्रवेश करने से पहले सुरक्षा जाँच से गुजरना
-              होगा।
-            </li>
-            <li>
-              2) मोबाइल फोन, कैमरा, इलेक्ट्रॉनिक डिवाइस, घड़ी आदि पर प्रतिबंध
-              है।
-            </li>
-            <li>
-              3) धूम्रपान, पान, गुटका, तंबाकू आदि पर पूर्णतया प्रतिबंध है।
-            </li>
-            <li>
-              4) आगंतुकों को अपने साथ व्यक्तिगत सामान लाने की अनुमति नहीं है।
-            </li>
-            <li>5) सभी आगंतुकों को अपने मोबाइल फोन आदि जमा करना होगा।</li>
-            <li>
-              6) अज्ञात वस्तु, विस्फोटक, या संदिग्ध वस्तुओं को लाना मना है।
-            </li>
-            <li>
-              7) अपनी नियुक्ति स्थल से बाहर न जाएं और किसी अन्य स्थान पर न जाएं।
-            </li>
-            <li>
-              8) आपातकालीन स्थिति में सभी आगंतुकों को सभा बिंदु पर इकट्ठा होना
-              चाहिए।
-            </li>
-          </ol>
-        </div>
-        <div>
-          <div class="visitor-slip-red-bar">
-            <p>PLEASE KEEP THIS POINTS IN MIND</p>
-          </div>
-
-          <ol>
-            <li>1) Individuals are requested to take care of their safety.</li>
-            <li>
-              2) While entering the plant, please wear safety shoes and a
-              helmet.
-            </li>
-            <li>
-              3) Help in keeping the plant clean. Bringing pan masala and gutka
-              into the plant is prohibited. Smoking is prohibited
-            </li>
-            <li>
-              4) Entry into the plant requires permission and a pass. For this,
-              please contact Security Gate No. 1.
-            </li>
-            <li>
-              5) All visitors are requested to deposit their mobile phones or
-              other electronic devices.
-            </li>
-            <li>
-              6) If any unknown object, explosive, or suspicious items are found
-              in the plant, please contact Security Gate No. 1.
-            </li>
-            <li>
-              7) Do not leave your designated work area and go to any other
-              location.
-            </li>
-            <li>
-              8) In case of an emergency, all visitors should gather at the
-              assembly point.
-            </li>
-          </ol>
-        </div>
-      </div>
-      <div class="visitor-slip-buttons">
-        <button class="print-btn">PRINT</button>
-        <button class="back-btn">BACK</button>
-      </div>
-    </div>
-			
-			
-			
-			<!-- Navbar End -->
-
-			<!-- <div class="m-3">
-
-				<div class="invoice">
-
-
-					<table class="table table-bordered">
-						<tbody>
-							<tr>
-								<td><strong>Sr No:</strong> <span th:text="${gatePass.id}"></span></td>
-								<td><strong>Date:</strong> <span th:text="${gatePass.date}"></span></td>
-							</tr>
-							<tr>
-								<td><strong>Gate Pass Number:</strong> <span
-									th:text="${gatePass.gatePassNumber}"></span></td>
-								<td><strong>Aadhar No:</strong> <span
-									th:text="${gatePass.aadharNo}"></span></td>
-							</tr>
-							<tr>
-								<td><strong>Full Name:</strong> <span
-									th:text="${gatePass.fullName}"></span></td>
-								<td><strong>Mobile No:</strong> <span
-									th:text="${gatePass.mobileNo}"></span></td>
-							</tr>
-							<tr>
-								<td><strong>Address:</strong> <span
-									th:text="${gatePass.address}"></span></td>
-								<td><strong>To See Whom:</strong> <span
-									th:text="${gatePass.toSeeWhom}"></span></td>
-							</tr>
-							<tr>
-								<td><strong>Purpose of Visit:</strong> <span
-									th:text="${gatePass.purposeToVisit}"></span></td>
-								<td><strong>Regular Visitor:</strong> <span
-									th:text="${gatePass.isRegular ? 'Yes' : 'No'}"></span></td>
-							</tr>
-							<tr>
-								<td><strong>Time In:</strong> <span
-									th:text="${gatePass.timeIn}"></span></td>
-								<td><strong>Time Out:</strong> <span
-									th:text="${gatePass.timeOut}"></span></td>
-							</tr>
-							<tr>
-								<td><strong>Access Level:</strong> <span
-									th:text="${gatePass.access}"></span></td>
-								<td><strong>Restricted:</strong> <span
-									th:text="${gatePass.restricted ? 'Yes' : 'No'}"></span></td>
-							</tr>
-							<tr>
-								<td class="text-center"><img
-									th:src="@{'/gate-pass/' + ${gatePass.photo}}"
-									class="visitor-photo" alt="Visitor Photo"> <br>
-								<strong>Visitor Photo</strong></td>
-								<td class="text-center"><img
-									th:src="@{'/gate-pass/' + ${gatePass.idPhoto}}"
-									class="id-photo" alt="ID Photo"> <br>
-								<strong>ID Photo</strong></td>
-							</tr>
-							<tr>
-								<td colspan="2" class="text-center"><img
-									th:src="@{'/gate-pass/' + ${gatePass.qrpath}}" class="qr-code"
-									alt="QR Code"> <br>
-								<strong>QR Code</strong></td>
-							</tr>
-						</tbody>
-					</table>
-
-
-					<div class="footer">
-						<button class="btn-print" onclick="printInvoice()">Print
-							Gate Pass</button>
+				<div class="visitor-slip-header">
+					<img th:src="@{'/gate-pass/' + ${gatePass.photo}}" alt="Left Logo"
+						class="left-logo" />
+					<p>Hindustan Petroleum Corporation Limited</p>
+					<p>Sion LPG Bottling Plant, G-6, MIDC, Malegaon, Maharashtra
+						422213 GSTIN: 27AAACH1088B1ZC</p>
+					<p>Visitor Slip</p>
+					<img src="qr-9e5843671f3cc028759d5660d9520d32.png" alt="Right Logo"
+						class="right-logo" />
+				</div>
+				<div class="visitor-slip-title-section">
+					<div>
+						<p>
+							तारीख (Date): <span th:text="${gatePass.date}"></span>
+						</p>
+					</div>
+					<div>
+						<p>PATALGANGA LPG FILLING PLANT</p>
+					</div>
+					<div>
+						<p>आगमन का समय (Arrival Time):_________</p>
+						<p>प्रस्थान का समय (Departure Time)</p>
 					</div>
 				</div>
+				<div class="visitor-slip-green-bar">केवल एडमिन क्षेत्र में
+					प्रवेश के लिए</div>
+				<div class="visitor-slip-details">
+					<div class="form-group">
+						<label>Sr No:</label> <input type="text" id="id" th:value="${gatePass.id}"
+							readonly />
+					</div>
+					<div class="form-group">
+						<label>१) आगंतुक का नाम</label> <input type="text" id="name"
+							th:value="${gatePass.fullName}" readonly />
+					</div>
+					<div class="form-group">
+						<label>२) कार्य स्थल (Location)</label> <input type="text" id="address"
+							th:value="${gatePass.address}" readonly />
+					</div>
+					<div class="form-group">
+						<label>३) आगंतुक का मोबाइल न.</label> <input type="text" id="contact"
+							th:value="${gatePass.mobileNo}" pattern="[0-9]{10}"
+							title="Please enter a 10-digit mobile number" readonly />
+					</div>
+					<div class="form-group">
+						<label>४) पहचान पत्र न.</label> <input type="text" id="passId"
+							th:value="${gatePass.gatePassNumber}" pattern="[0-9]{12}"
+							title="Please enter a 12-digit ID number" readonly />
+					</div>
+					<div class="form-group">
+						<label>५) मालिक/व्यवसाय का नाम</label> <input type="text"
+							th:value="${gatePass.fullName}" readonly />
+					</div>
+					<div class="form-group">
+						<label>६) उद्देश्य</label> <input type="text" id="purpose"
+							th:value="${gatePass.purposeToVisit}" readonly />
+					</div>
+					<div class="form-group">
+						<label>७) कंपनी का नाम (Company Name)</label> <input type="text"
+							value="" required pattern="[A-Za-z\s]{1,50}"
+							title="Please enter a valid company name (letters and spaces only, max 50 characters)" />
+					</div>
+					<div class="form-group">
+						<label>८) वाहन नंबर (Vehicle Number)</label> <input type="text"
+							value="" required pattern="[A-Za-z0-9]{1,10}"
+							title="Please enter a valid vehicle number (max 10 characters)" />
+					</div>
+					<div class="form-group">
+						<label>९) गाड़ी का प्रकार (Vehicle Type)</label> <input type="text"
+							value="" required pattern="[A-Za-z\s]{1,20}"
+							title="Please enter a valid vehicle type (letters and spaces only, max 20 characters)" />
+					</div>
+					<div class="form-group">
+						<label>१०) ड्राइवर का नाम (Driver Name)</label> <input type="text"
+							value="" required pattern="[A-Za-z\s]{1,50}"
+							title="Please enter a valid driver name (letters and spaces only, max 50 characters)" />
+					</div>
+					<div class="form-group">
+						<label>११) ड्राइवर का मोबाइल न. (Driver Mobile Number)</label> <input
+							type="text" value="" required pattern="[0-9]{10}"
+							title="Please enter a 10-digit mobile number" />
+					</div>
+					<div class="form-group">
+						<label>१२) सामग्री का विवरण (Material Description)</label> <input
+							type="text" value="" required pattern="[A-Za-z0-9\s]{1,100}"
+							title="Please enter a valid material description (max 100 characters)" />
+					</div>
+					<div class="form-group">
+						<label>१३) सामग्री की मात्रा (Material Quantity)</label> <input
+							type="number" value="" required min="1"
+							title="Please enter a valid quantity" />
+					</div>
+					<div class="form-group">
+						<label>१४) लोडिंग/अनलोडिंग समय (Loading/Unloading Time)</label> <input
+							type="text" value="" required pattern="[0-9]{2}:[0-9]{2}"
+							title="Please enter time in HH:MM format" />
+					</div>
+				</div>
+				<div class="visitor-slip-signatures">
+					<div>
+						<p>आगंतुक के हस्ताक्षर</p>
+						<input type="text" value="Visitor Signature" readonly />
+					</div>
+					<div>
+						<p>सुरक्षा के हस्ताक्षर</p>
+						<input type="text" value="Security Signature" readonly />
+					</div>
+					<div>
+						<p>प्राप्तकर्ता के हस्ताक्षर</p>
+						<input type="text" value="Receiver Signature" readonly />
+					</div>
+				</div>
+				<div class="visitor-slip-red-bar">लाइसेंस प्राप्त क्षेत्र में
+					प्रवेश के लिए</div>
+				<!-- Added missing fields for Licensed Area Entry -->
+				<div class="visitor-slip-additional-details">
+					<div class="form-group">
+						<label>नाम:</label> <input type="text"
+							th:value="${gatePass.fullName}" required
+							pattern="[A-Za-z\s]{1,50}"
+							title="Please enter a valid name (letters and spaces only, max 50 characters)" />
+					</div>
+					<div class="form-group">
+						<label>हस्ताक्षर:</label> <input type="text" value="" required
+							pattern="[A-Za-z\s]{1,50}"
+							title="Please enter a valid signature (letters and spaces only, max 50 characters)" />
+					</div>
+					<div class="form-group">
+						<label>उद्देश्य:</label> <input type="text"
+							th:value="${gatePass.purposeToVisit}" required
+							pattern="[A-Za-z\s]{1,50}"
+							title="Please enter a valid purpose (letters and spaces only, max 50 characters)" />
+					</div>
+				</div>
+				<div class="visitor-slip-safety">
+					<p>I have been apprised about all safety precautions to be
+						taken while in licensed area and which are also printed on the
+						backside of visitor slip.</p>
+					<p>मुझे लाइसेंस प्राप्त क्षेत्र में रहते समय सभी सुरक्षा
+						सावधानियों के बारे में सूचित किया गया है जो आगंतुक पर्ची के पीछे
+						भी मुद्रित हैं।</p>
+				</div>
+				<div class="visitor-slip-signatures-bottom">
+					<div>
+						<p>सुरक्षा के हस्ताक्षर</p>
+						<input type="text" value="Security Signature" readonly />
+					</div>
+					<div>
+						<p>आगंतुक के हस्ताक्षर</p>
+						<input type="text" value="Visitor Signature" readonly />
+					</div>
+				</div>
+				<div class="visitor-slip-footer">
+					<div>
+						<div class="visitor-slip-red-bar">
+							<p>कृपया निम्न बातों को ध्यान रखें</p>
+						</div>
 
-				<script>
-    function printInvoice() {
-        window.print();
-    }
+						<ol>
+							<li>1) सभी आगंतुकों को प्रवेश करने से पहले सुरक्षा जाँच से
+								गुजरना होगा।</li>
+							<li>2) मोबाइल फोन, कैमरा, इलेक्ट्रॉनिक डिवाइस, घड़ी आदि पर
+								प्रतिबंध है।</li>
+							<li>3) धूम्रपान, पान, गुटका, तंबाकू आदि पर पूर्णतया प्रतिबंध
+								है।</li>
+							<li>4) आगंतुकों को अपने साथ व्यक्तिगत सामान लाने की अनुमति
+								नहीं है।</li>
+							<li>5) सभी आगंतुकों को अपने मोबाइल फोन आदि जमा करना होगा।</li>
+							<li>6) अज्ञात वस्तु, विस्फोटक, या संदिग्ध वस्तुओं को लाना
+								मना है।</li>
+							<li>7) अपनी नियुक्ति स्थल से बाहर न जाएं और किसी अन्य स्थान
+								पर न जाएं।</li>
+							<li>8) आपातकालीन स्थिति में सभी आगंतुकों को सभा बिंदु पर
+								इकट्ठा होना चाहिए।</li>
+						</ol>
+					</div>
+					<div>
+						<div class="visitor-slip-red-bar">
+							<p>PLEASE KEEP THIS POINTS IN MIND</p>
+						</div>
+
+						<ol>
+							<li>1) Individuals are requested to take care of their
+								safety.</li>
+							<li>2) While entering the plant, please wear safety shoes
+								and a helmet.</li>
+							<li>3) Help in keeping the plant clean. Bringing pan masala
+								and gutka into the plant is prohibited. Smoking is prohibited</li>
+							<li>4) Entry into the plant requires permission and a pass.
+								For this, please contact Security Gate No. 1.</li>
+							<li>5) All visitors are requested to deposit their mobile
+								phones or other electronic devices.</li>
+							<li>6) If any unknown object, explosive, or suspicious items
+								are found in the plant, please contact Security Gate No. 1.</li>
+							<li>7) Do not leave your designated work area and go to any
+								other location.</li>
+							<li>8) In case of an emergency, all visitors should gather
+								at the assembly point.</li>
+						</ol>
+					</div>
+				</div>
+				<div class="visitor-slip-buttons">
+					<button class="print-btn">PRINT</button>
+					<button class="back-btn">BACK</button>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+			<div id="qrcode" class="qr-code-container"></div>
+			<br />
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Extract gatePass data directly from Thymeleaf into a JS object
+    const gatePass = {
+        id: document.querySelector('#id')?.value || 'N/A',
+        fullName: document.querySelector('#name')?.value || 'N/A',
+        date: document.querySelector('#date')?.textContent || 'N/A', // Using textContent since it's a span
+        address: document.querySelector('#address')?.value || 'N/A',
+        mobileNo: document.querySelector('#contact')?.value || 'N/A',
+        gatePassNumber: document.querySelector('#passId')?.value || 'N/A',
+        purposeToVisit: document.querySelector('#purpose')?.value || 'N/A',
+        // Add toSeeWhom if it exists in your HTML, otherwise remove it from qrData
+        toSeeWhom: document.querySelector('#gatePassToSeeWhom')?.value || 'N/A' // Assuming an input with this ID
+    };
+
+    // Create QR code data string with actual values
+    const qrData = `
+        Visitor Pass Details:
+        ID: ${gatePass.id}
+        Name: ${gatePass.fullName}
+        Date: ${gatePass.date}
+        Mobile: ${gatePass.mobileNo}
+        Address: ${gatePass.address}
+        To See: ${gatePass.toSeeWhom}
+        Purpose: ${gatePass.purposeToVisit}
+    `.trim();
+
+    // Generate QR code
+    new QRCode(document.getElementById("qrcode"), {
+        text: qrData,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // Add click event to print button
+    document.querySelector('.print-btn').addEventListener('click', function() {
+        // Create a temporary print area
+        const printContent = `
+            <div class="visitor-slip">
+                ${document.querySelector('.visitor-slip').innerHTML}
+            </div>
+            <div class="qr-code-container">
+                ${document.getElementById('qrcode').innerHTML}
+            </div>
+        `;
+
+        // Open a new window for printing
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Print Visitor Slip</title>
+                    <style>
+                        /* Add your CSS here or link to your stylesheet */
+                        .visitor-slip { /* Copy your existing CSS */ }
+                        .qr-code-container { text-align: center; margin-top: 20px; }
+                        @media print {
+                            .visitor-slip-buttons { display: none; } /* Hide buttons when printing */
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${printContent}
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+    });
+});
 </script>
 
-			</div> -->
+
+
+
 
 
 			<script>
@@ -985,9 +940,6 @@ window.onunload = function() {
         alert("Error generating Gate Pass. Please try again.");
     });
 });
-			
-			
-			
 			</script>
 
 			<!-- JavaScript Libraries -->
